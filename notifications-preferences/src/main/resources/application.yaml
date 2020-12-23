@@ -1,0 +1,36 @@
+server:
+  port: 8082
+management:
+  endpoint:
+    health:
+      show-details: always
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - env
+          - health
+          - info
+          - refresh
+spring:
+  application:
+    name: corp-notifications-preferences
+  cloud:
+    stream:
+      default-binder: kafka
+      kafka:
+        binder:
+          brokers:
+            - ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
+      bindings:
+        input:
+          binder: kafka
+          destination: notifications
+          content-type: application/json
+          group: input-notifications-preferences
+        output:
+          binder: kafka
+          destination: notifications
+          content-type: application/json
