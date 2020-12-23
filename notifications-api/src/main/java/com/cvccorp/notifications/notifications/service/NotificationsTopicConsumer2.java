@@ -1,6 +1,5 @@
 package com.cvccorp.notifications.notifications.service;
 
-import com.cvccorp.notifications.notifications.dto.RequestMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -14,14 +13,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @AllArgsConstructor
-@EnableBinding(Sink.class)
-public class NotificationsTopicConsumer {
+@EnableBinding(Sink2.class)
+public class NotificationsTopicConsumer2 {
 
     private CallbackService service;
 
-    @StreamListener(target = Sink.INPUT)
+    @StreamListener(target = Sink2.INPUT)
     public void handle(@Payload String message, @Headers MessageHeaders headers) {
-        log.info("Received {} message {} headers {}", 1, message, headers);
+        log.info("Received {} message {} headers {}", 0, message, headers);
         service.process("", message);
     }
 
