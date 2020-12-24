@@ -19,15 +19,17 @@ import java.util.Map;
 @AllArgsConstructor
 public class ConfigurationService {
 
-    private NotificationTopicProducer producer;
+    private final NotificationTopicProducer producer;
 
-    public void process(String jsonMessage) {
+    public void process(String key, String jsonMessage) {
         try {
             RequestMessage message = new JsonMapper().readValue(jsonMessage, RequestMessage.class);
 
             log.info("notification {}", message.getNotification());
 
             Configuration configuration = new Configuration();
+            configuration.setCallbackUrl("http://client/notification/status/update");
+
             List<Channel> channels = new ArrayList<>();
             Channel email = new Channel();
             Map<String, String> emailConfig = new HashMap<>();
@@ -35,6 +37,7 @@ public class ConfigurationService {
             emailConfig.put("to", "abc@def.com");
             emailConfig.put("cc", "abc1@def.com;abc2@def.com");
             emailConfig.put("cco", "abc3@def.com;abc4@def.com");
+            emailConfig.put("subject", "E-mail de teste");
             emailConfig.put("template", "1a2b3c4d");
             email.setType("email");
             email.setConfiguration(emailConfig);
@@ -43,7 +46,7 @@ public class ConfigurationService {
 
             message.setConfiguration(configuration);
             log.info("configuration {}", configuration);
-            producer.publish(message);
+            producer.publish(key, message);
         } catch (
                 JsonProcessingException e) {
             e.printStackTrace();

@@ -17,7 +17,7 @@ public class CallbackService {
             ResponseMessage response = new ResponseMessage();
             response.setNotificationId(key);
             response.setChannelStatusMap(message.getChannelStatusMap());
-            log.info("Callback {}", response);
+            log.info("Callback sent to {} {}", message.getConfiguration().getCallbackUrl(), response);
         } catch (
                 JsonProcessingException e) {
             e.printStackTrace();

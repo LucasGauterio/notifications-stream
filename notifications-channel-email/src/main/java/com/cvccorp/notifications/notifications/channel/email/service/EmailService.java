@@ -1,5 +1,6 @@
 package com.cvccorp.notifications.notifications.channel.email.service;
 
+import com.cvccorp.notifications.notifications.channel.email.dto.Channel;
 import com.cvccorp.notifications.notifications.channel.email.dto.RequestMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -14,20 +15,22 @@ import java.util.HashMap;
 @AllArgsConstructor
 public class EmailService {
 
-    private NotificationTopicProducer producer;
+    private final NotificationTopicProducer producer;
 
-    public void process(String jsonMessage) {
+    public void process(String key, String jsonMessage) {
         try {
             RequestMessage message = new JsonMapper().readValue(jsonMessage, RequestMessage.class);
-            log.info("notification {}", message.getNotification());
-            log.info("configuration {}", message.getConfiguration());
-            log.info("content {}", message.getContent());
+            log.info("-> EMAIL");
+            Channel email = message.getConfiguration().getChannels().stream().filter(channel -> "email".equals(channel.getType())).findFirst().orElse(null);
+            log.info("--> CONFIGURATION {}", email.getConfiguration());
+            log.info("--> CONTENT {}", message.getContent());
+            log.info("--> ATTACHMENTS {}", message.getNotification().getAttachments());
             HashMap<String, String> statusMap = message.getChannelStatusMap();
-            if(statusMap==null)
+            if (statusMap == null)
                 statusMap = new HashMap<>();
-            statusMap.put("email","delivered");
+            statusMap.put("email", "delivered");
             message.setChannelStatusMap(statusMap);
-            producer.publish(message);
+            producer.publish(key, message);
         } catch (
                 JsonProcessingException e) {
             e.printStackTrace();

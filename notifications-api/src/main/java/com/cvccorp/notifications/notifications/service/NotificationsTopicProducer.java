@@ -9,6 +9,7 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
@@ -19,19 +20,22 @@ import java.util.UUID;
 @EnableBinding(Source.class)
 public class NotificationsTopicProducer {
 
-    private final int TARGET_PARTITION = 0;
-
     private Source outputSource;
 
     public String publish(RequestMessage message) {
-        String key = UUID.randomUUID().toString();
-        log.info("Publishing {} message {}", TARGET_PARTITION, message);
+        return publish(null, message);
+    }
+
+    public String publish(String key, RequestMessage message) {
+        if(StringUtils.isEmpty(key))
+            key = UUID.randomUUID().toString();
+        log.info("Publishing message {}", message);
         outputSource.output()
                 .send(
                         MessageBuilder
                                 .withPayload(message)
                                 .setHeader(KafkaHeaders.MESSAGE_KEY, key.getBytes(StandardCharsets.UTF_8))
-                                .setHeader(KafkaHeaders.PARTITION_ID, TARGET_PARTITION)
+                                .setHeader("type","notification")
                                 .build()
                 );
         return key;

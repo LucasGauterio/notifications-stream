@@ -24,40 +24,13 @@ spring:
         binder:
           brokers:
             - ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
-        bindings:
-          input:
-            consumer:
-              configuration:
-                partition:
-                  assignment:
-                    strategy: com.cvccorp.notifications.notifications.service.PartitionOneAssignor
-          input2:
-            consumer:
-              configuration:
-                partition:
-                  assignment:
-                    strategy: com.cvccorp.notifications.notifications.service.PartitionZeroAssignor
       bindings:
         input:
           binder: kafka
           destination: notifications-stream
           content-type: application/json
           group: "input-notifications-api"
-          consumer:
-            partitionCount: 2
-            autoAddPartitions: true
-        input2:
-          binder: kafka
-          destination: notifications-stream
-          content-type: application/json
-          group: "input2-notifications-api"
-          consumer:
-            partitionCount: 2
-            autoAddPartitions: true
         output:
           binder: kafka
           destination: notifications-stream
           content-type: application/json
-          producer:
-            partitionCount: 2
-            autoAddPartitions: true

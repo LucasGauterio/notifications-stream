@@ -6,7 +6,8 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,10 @@ public class NotificationTopicConsumer {
 
     private final EmailService service;
 
-    @StreamListener(target = Sink.INPUT)
-    public void consume(@Payload String message) {
-        log.info("Received message {}", message);
-        service.process(message);
+    @StreamListener(target = Sink.INPUT, condition="headers['type']=='template' AND headers['channel']=='email'")
+    public void handle(@Payload String message, @Headers MessageHeaders headers) {
+        log.info("Received message {} headers {}", message, headers);
+        service.process(headers.get(KafkaHeaders.RECEIVED_MESSAGE_KEY).toString(), message);
     }
 
 }

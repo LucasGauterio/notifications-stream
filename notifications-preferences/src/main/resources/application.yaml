@@ -27,10 +27,10 @@ spring:
       bindings:
         input:
           binder: kafka
-          destination: notifications
+          destination: notifications-stream
           content-type: application/json
           group: input-notifications-preferences
         output:
           binder: kafka
-          destination: notifications
+          destination: notifications-stream
           content-type: application/json
