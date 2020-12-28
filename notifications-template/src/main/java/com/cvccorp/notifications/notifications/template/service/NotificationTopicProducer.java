@@ -30,7 +30,7 @@ public class NotificationTopicProducer {
                         MessageBuilder
                                 .withPayload(message)
                                 .setHeader(KafkaHeaders.MESSAGE_KEY, key.getBytes(StandardCharsets.UTF_8))
-                                .setHeader("type","template")
+                                .setHeader("status","templated")
                                 .setHeader("channel", channel)
                                 .build()
                 );

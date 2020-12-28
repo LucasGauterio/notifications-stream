@@ -19,7 +19,7 @@ public class NotificationsTopicConsumer {
 
     private CallbackService service;
 
-    @StreamListener(target = Sink.INPUT, condition="headers['type']=='status'")
+    @StreamListener(target = Sink.INPUT, condition="headers['status']=='success'")
     public void handle(@Payload String message, @Headers MessageHeaders headers) {
         log.info("Received message {} headers {}", message, headers);
         service.process(headers.get(KafkaHeaders.RECEIVED_MESSAGE_KEY).toString(), message);

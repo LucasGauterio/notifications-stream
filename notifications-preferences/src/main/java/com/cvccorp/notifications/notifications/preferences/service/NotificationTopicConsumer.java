@@ -19,7 +19,7 @@ public class NotificationTopicConsumer {
 
     private final ConfigurationService service;
 
-    @StreamListener(target = Sink.INPUT, condition="headers['type']=='notification'")
+    @StreamListener(target = Sink.INPUT, condition="headers['status']=='initiated'")
     public void handle(@Payload String message, @Headers MessageHeaders headers) {
         log.info("Received message {} headers {}", message, headers);
         service.process(headers.get(KafkaHeaders.RECEIVED_MESSAGE_KEY).toString(), message);
