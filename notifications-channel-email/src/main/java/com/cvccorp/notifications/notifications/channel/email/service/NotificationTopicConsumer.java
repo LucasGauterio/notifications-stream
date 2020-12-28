@@ -19,7 +19,7 @@ public class NotificationTopicConsumer {
 
     private final EmailService service;
 
-    @StreamListener(target = Sink.INPUT, condition="headers['type']=='template' AND headers['channel']=='email'")
+    @StreamListener(target = Sink.INPUT, condition="headers['status']=='templated' and headers['type']=='email'")
     public void handle(@Payload String message, @Headers MessageHeaders headers) {
         log.info("Received message {} headers {}", message, headers);
         service.process(headers.get(KafkaHeaders.RECEIVED_MESSAGE_KEY).toString(), message);
