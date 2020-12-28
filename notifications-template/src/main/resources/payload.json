@@ -29,7 +29,7 @@
       "content": "file encoded base64"
     }]
   },
-  "configuration" : {
+  "preferences" : {
     "channels":[
       {
         "type" : "email",
@@ -37,15 +37,10 @@
         "to" : "",
         "cc" : "",
         "cco" : "",
-        "subject" : ""
+        "templateId": ""
       },
       {
         "type" : "webpush",
-        "from" : "",
-        "to" : ""
-      },
-      {
-        "type" : "sms",
         "from" : "",
         "to" : ""
       },
