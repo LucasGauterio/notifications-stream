@@ -21,7 +21,7 @@ public class NotificationTopicProducer {
 
     private final Source outputSource;
 
-    public String publish(String key, RequestMessage message, String channel) {
+    public String publish(String key, RequestMessage message, String type) {
         if (StringUtils.isEmpty(key))
             key = UUID.randomUUID().toString();
         log.info("Publishing message {}", message);
@@ -31,7 +31,7 @@ public class NotificationTopicProducer {
                                 .withPayload(message)
                                 .setHeader(KafkaHeaders.MESSAGE_KEY, key.getBytes(StandardCharsets.UTF_8))
                                 .setHeader("status","templated")
-                                .setHeader("channel", channel)
+                                .setHeader("type", type)
                                 .build()
                 );
         return key;
