@@ -13,6 +13,10 @@
         <module>notifications-preferences</module>
         <module>notifications-template</module>
         <module>notifications-channel-email</module>
+        <module>notifications-channel-sms</module>
+        <module>notifications-channel-web-push</module>
+        <module>notifications-channel-mobile-push</module>
+        <module>notifications-channel-whatsapp</module>
     </modules>
 
 </project>

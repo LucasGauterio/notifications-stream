@@ -1,0 +1,36 @@
+server:
+  port: 8084
+management:
+  endpoint:
+    health:
+      show-details: always
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - env
+          - health
+          - info
+          - refresh
+spring:
+  application:
+    name: corp-notifications-channel-mobile-push
+  cloud:
+    stream:
+      default-binder: kafka
+      kafka:
+        binder:
+          brokers:
+            - ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
+      bindings:
+        input:
+          binder: kafka
+          destination: notifications-stream
+          content-type: application/json
+          group: input-notifications-channel-mobile-push
+        output:
+          binder: kafka
+          destination: notifications-stream
+          content-type: application/json
