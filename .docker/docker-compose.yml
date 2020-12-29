@@ -25,3 +25,30 @@ services:
     ports:
       - 8084:8084
     network_mode: host
+  channel-mobile-push:
+    image: notifications-channel-mobile-push
+    restart: on-failure
+    ports:
+      - 8085:8085
+    network_mode: host
+  channel-sms:
+    image: notifications-channel-sms
+    restart: on-failure
+    ports:
+      - 8086:8086
+    network_mode: host
+  channel-web-push:
+    image: notifications-channel-web-push
+    restart: on-failure
+    ports:
+      - 8087:8087
+    network_mode: host
+  channel-whatsapp:
+    image: notifications-channel-whatsapp
+    restart: on-failure
+    ports:
+      - 8088:8088
+    network_mode: host
+
+
+
