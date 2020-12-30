@@ -1,6 +1,6 @@
-package com.cvccorp.notifications.notifications.preferences.service;
+package com.cvccorp.notifications.notifications.audit.service;
 
-import com.cvccorp.notifications.notifications.preferences.dto.RequestMessage;
+import com.cvccorp.notifications.notifications.audit.dto.RequestMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -24,6 +24,7 @@ public class NotificationTopicProducer {
     public String publish(String key, RequestMessage message) {
         if(StringUtils.isEmpty(key))
             key = UUID.randomUUID().toString();
+        message.setProducer("notifications-preferences");
         log.info("Publishing message {}", message);
         outputSource.output()
                 .send(

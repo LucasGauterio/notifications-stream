@@ -24,6 +24,7 @@ public class NotificationTopicProducer {
     public String publish(String key, RequestMessage message) {
         if(StringUtils.isEmpty(key))
             key = UUID.randomUUID().toString();
+        message.setProducer("notifications-channel-sms");
         log.info("Publishing message {}", message);
         outputSource.output()
                 .send(

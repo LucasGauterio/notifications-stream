@@ -1,4 +1,4 @@
-package com.cvccorp.notifications.notifications.preferences.dto;
+package com.cvccorp.notifications.notifications.audit.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Context {
+public class RequestMessage {
 
-    private String company;
-    private String brand;
-    private String channel;
-    private String site;
+    private String producer;
+
+    private Notification notification;
+
+    private Configuration configuration;
 
 }

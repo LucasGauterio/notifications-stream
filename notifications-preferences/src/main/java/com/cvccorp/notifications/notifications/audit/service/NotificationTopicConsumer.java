@@ -1,4 +1,4 @@
-package com.cvccorp.notifications.notifications.preferences.service;
+package com.cvccorp.notifications.notifications.audit.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

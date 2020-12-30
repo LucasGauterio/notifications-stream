@@ -49,6 +49,12 @@ services:
     ports:
       - 8088:8088
     network_mode: host
+  #audit:
+  #   image: notifications-audit
+  #  restart: on-failure
+  #  ports:
+  #    - 8089:8089
+  #  network_mode: host
 
 
 

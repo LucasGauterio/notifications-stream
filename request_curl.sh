@@ -1,4 +1,4 @@
-curl --location --request POST 'http://localhost:8081/notification/publish' \
+curl --location --request POST 'http://localhost:8089/notification/publish' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "notification" : {

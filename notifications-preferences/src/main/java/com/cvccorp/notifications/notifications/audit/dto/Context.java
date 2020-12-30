@@ -1,8 +1,4 @@
-package com.cvccorp.notifications.notifications.preferences.dto;
-
-import java.util.ArrayList;
-import java.util.List;
-
+package com.cvccorp.notifications.notifications.audit.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -14,10 +10,11 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Configuration {
+public class Context {
 
-    private String callbackUrl;
-    private List<Channel> channels = new ArrayList<>();
-    private List<String> tags = new ArrayList<>();
+    private String company;
+    private String brand;
+    private String channel;
+    private String site;
 
 }

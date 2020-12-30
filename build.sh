@@ -14,4 +14,5 @@ cd ../notifications-channel-mobile-push
 sh build.sh
 cd ../notifications-channel-whatsapp
 sh build.sh
-
+cd ../notifications-audit
+sh build.sh
