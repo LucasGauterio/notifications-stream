@@ -1,8 +1,8 @@
-package com.cvccorp.notifications.notifications.preferences.service;
+package com.cvccorp.notifications.notifications.audit.service;
 
-import com.cvccorp.notifications.notifications.preferences.dto.Channel;
-import com.cvccorp.notifications.notifications.preferences.dto.Configuration;
-import com.cvccorp.notifications.notifications.preferences.dto.RequestMessage;
+import com.cvccorp.notifications.notifications.audit.dto.Channel;
+import com.cvccorp.notifications.notifications.audit.dto.Configuration;
+import com.cvccorp.notifications.notifications.audit.dto.RequestMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.AllArgsConstructor;

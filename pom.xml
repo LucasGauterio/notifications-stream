@@ -10,6 +10,7 @@
 
     <modules>
         <module>notifications-api</module>
+        <module>notifications-audit</module>
         <module>notifications-preferences</module>
         <module>notifications-template</module>
         <module>notifications-channel-email</module>

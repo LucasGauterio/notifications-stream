@@ -1,4 +1,4 @@
-package com.cvccorp.notifications.notifications.preferences.dto;
+package com.cvccorp.notifications.notifications.audit.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

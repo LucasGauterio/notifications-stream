@@ -1,4 +1,8 @@
-package com.cvccorp.notifications.notifications.preferences.dto;
+package com.cvccorp.notifications.notifications.audit.dto;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -10,12 +14,10 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class RequestMessage {
+public class Configuration {
 
-    private String producer;
-
-    private Notification notification;
-
-    private Configuration configuration;
+    private String callbackUrl;
+    private List<Channel> channels = new ArrayList<>();
+    private List<String> tags = new ArrayList<>();
 
 }
