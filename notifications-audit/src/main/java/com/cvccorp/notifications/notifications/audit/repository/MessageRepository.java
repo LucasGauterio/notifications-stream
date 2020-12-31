@@ -10,16 +10,16 @@ public interface MessageRepository extends CrudRepository <Message, Long> {
     public List<Message> findAll ();
     @Query ("{\n" +
             "    \"nested\": {\n" +
-            "      \"path\": \"map\",\n" +
+            "      \"path\": \"?0\",\n" +
             "      \"query\": {\n" +
             "        \"bool\": {\n" +
             "          \"must\": [\n" +
-            "            { \"match\": { \"?0\": \"?1\"} }\n" +
+            "            { \"match\": { \"?1\": \"?2\"} }\n" +
             "          ]\n" +
             "        }\n" +
             "      },\n" +
-            "      \"score_mode\": \"avg\"\n" +
+            "      \"score_mode\": \"none\"\n" +
             "    }\n" +
             "  }")
-    public List<Message> findByField (String field, String value);
+    public List<Message> findByField (String path, String field, String value);
 }
